@@ -1,0 +1,31 @@
+﻿[
+  {
+    "University": "VIT",
+    "Country": "Iran",
+    "Title": "B.Tech",
+    "Degree": "Information Technology",
+    "Yearofgraduation": 2012
+  },
+  {
+    "University": "Madras University",
+    "Country": "India",
+    "Title": "M.Tech",
+    "Degree": "Information Technology",
+    "Yearofgraduation": 2015
+  },
+  {
+    "University": "<>&%*(*&**",
+    "Country": "New Zealand",
+    "Title": "B.A",
+    "Degree": 55555,
+    "Yearofgraduation": 2019
+  },
+  {
+    "University": "3333*&**",
+    "Country": "New Zealand",
+    "Title": "B.A",
+    "Degree": "-----",
+    "Yearofgraduation": 2019
+  }
+
+]
