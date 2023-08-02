@@ -21,6 +21,7 @@ namespace Mars_CompetitionNUnit.Tests
         [SetUp]
         public void SetUpActions()
         {
+            
             //Open chrome browser
             driver = new ChromeDriver();
             loginTestPageObj = new LoginTestPage();

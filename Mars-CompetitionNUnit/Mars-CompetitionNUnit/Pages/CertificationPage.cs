@@ -59,8 +59,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyUpdateCertificationsList()
         {
-            // Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
-            Thread.Sleep(2000);
+            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
+            //Thread.Sleep(2000);
             return newUpdatedCertificate.Text;
         }
 
@@ -76,8 +76,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyDeleteCertificationList()
         {
-            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
-            Thread.Sleep(2000);
+            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
+            // Thread.Sleep(2000);
             return deletedCertificate.Text;
         }
     }

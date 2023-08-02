@@ -82,8 +82,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyDeleteEducationList()
         {
-            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='third']//table//td", 20);
-            //Thread.Sleep(2000);
+            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='third']//table//td", 20);
+            Thread.Sleep(2000);
             return deletedCountry.Text;
         }
     }
