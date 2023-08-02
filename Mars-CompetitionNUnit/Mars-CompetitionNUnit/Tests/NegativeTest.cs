@@ -31,8 +31,7 @@ namespace Mars_CompetitionNUnit.Tests
         public void Test1AddWithEducationData()
         {
             // Read test data from the JSON file using Jsonhelper
-            string sFile = "AddEducationNegativedata.json";
-            List<EducationTestModel> AddEducationNegativedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>(sFile);
+            List<EducationTestModel> AddEducationNegativedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>("D:\\IC Course\\Competition Task\\Mars-QACompetition\\Mars-CompetitionNUnit\\Mars-CompetitionNUnit\\Json Datafile\\AddEducationNegativedata.json");
             Console.WriteLine(AddEducationNegativedata.ToString());
             foreach (var data in AddEducationNegativedata)
 
@@ -52,8 +51,7 @@ namespace Mars_CompetitionNUnit.Tests
         public void TestUpdateWithEducationData()
         {
             // Read test data from the JSON file
-            string sFile = "UpdateEducationNegativedata.json";
-            List<EducationTestModel> UpdateEducationNegativedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>(sFile);
+            List<EducationTestModel> UpdateEducationNegativedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>("D:\\IC Course\\Competition Task\\Mars-QACompetition\\Mars-CompetitionNUnit\\Mars-CompetitionNUnit\\Json Datafile\\UpdateEducationNegativedata.json");
             Console.WriteLine(UpdateEducationNegativedata.ToString());
             foreach (var data in UpdateEducationNegativedata)
 

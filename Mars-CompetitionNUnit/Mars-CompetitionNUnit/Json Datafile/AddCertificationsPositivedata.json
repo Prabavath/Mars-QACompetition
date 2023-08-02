@@ -1,0 +1,27 @@
+﻿[
+  {
+    "certificate": "Java Expert",
+    "certifiedFrom": "AKP Technologies",
+    "year": 2010
+  },
+  {
+    "certificate": "Certified Software Tester",
+    "certifiedFrom": "Quality Assurance Institute",
+    "year": 2005
+  },
+  {
+    "certificate": "Security Tester",
+    "certifiedFrom": "CTFL",
+    "year": 2011
+  },
+  {
+    "certificate": 55555,
+    "certifiedFrom": 4444,
+    "year": 2017
+  },
+  {
+    "certificate": "@@@&&%%",
+    "certifiedFrom": "<#@%$#",
+    "year": 2017
+  }
+]

@@ -20,6 +20,7 @@ namespace Mars_CompetitionNUnit.Tests
     {
         private LoginTestPage loginTestPageObj = new LoginTestPage();
         private EducationPage educationPageObj = new EducationPage();
+        
         [SetUp]
         public void SetUpActions()
         {
@@ -32,8 +33,7 @@ namespace Mars_CompetitionNUnit.Tests
         public void TestAddWithEducationData()
         {
             // Read test data from the JSON file using Jsonhelper
-            string sFile = "AddEducationPositivedata.json";
-            List<EducationTestModel> AddEducationPositivedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>(sFile);
+            List<EducationTestModel> AddEducationPositivedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>("D:\\IC Course\\Competition Task\\Mars-QACompetition\\Mars-CompetitionNUnit\\Mars-CompetitionNUnit\\Json Datafile\\AddEducationPositivedata.json");
             Console.WriteLine(AddEducationPositivedata.ToString());
             foreach (var data in AddEducationPositivedata)
             {
@@ -57,7 +57,7 @@ namespace Mars_CompetitionNUnit.Tests
                 }
                 else
                 {
-                   Console.WriteLine("Check error");
+                    Assert.AreNotEqual(country, newCountry, "Actual country and expected country do match");
                 }
             }
         }
@@ -66,8 +66,7 @@ namespace Mars_CompetitionNUnit.Tests
         public void TestUpdateWithEducationData()
         {
             // Read test data from the JSON file
-            string sFile = "UpdateEducationPositivedata.json";
-            List<EducationTestModel> UpdateEducationPositivedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>(sFile);
+            List<EducationTestModel> UpdateEducationPositivedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>("D:\\IC Course\\Competition Task\\Mars-QACompetition\\Mars-CompetitionNUnit\\Mars-CompetitionNUnit\\Json Datafile\\UpdateEducationPositivedata.json");
             Console.WriteLine(UpdateEducationPositivedata.ToString());
             foreach (var data in UpdateEducationPositivedata)
             {
@@ -108,8 +107,7 @@ namespace Mars_CompetitionNUnit.Tests
         public void TestDeleteWithEducationData()
         {
             // Read test data from the JSON file
-            string sFile = "Deletedata.json";
-            List<EducationTestModel> Deletedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>(sFile);
+            List<EducationTestModel> Deletedata = Jsonhelper.ReadTestDataFromJson<EducationTestModel>("D:\\IC Course\\Competition Task\\Mars-QACompetition\\Mars-CompetitionNUnit\\Mars-CompetitionNUnit\\Json Datafile\\Deletedata.json");
             Console.WriteLine(Deletedata.ToString());
             foreach (var data in Deletedata)
             {
