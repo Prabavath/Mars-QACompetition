@@ -5,31 +5,43 @@ using Mars_CompetitionNUnit.Pages;
 using Mars_CompetitionNUnit.TestModel;
 using Mars_CompetitionNUnit.Utilities;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.DevTools.V112.Page;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Mars_CompetitionNUnit.Tests
 {
     [TestFixture]
-    public class EducationTest : CommonDriver
+    public class EducationTest :CommonDriver
     {
+#pragma warning disable CS8618
+
+        private ExtentReports extent;
+        private ExtentTest test;
+        [OneTimeSetUp]
+        public void SetupReporting()
+        {
+            string reportPath = "D:\\IC Course\\Competition Task\\Mars-QACompetition\\Mars-CompetitionNUnit\\Mars-CompetitionNUnit\\Utilities\\Extent\\ExtentTest.cs"; 
+            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(reportPath);
+            extent = new ExtentReports();
+            extent.AttachReporter(htmlReporter);
+        }
         private LoginTestPage loginTestPageObj = new LoginTestPage();
         private EducationPage educationPageObj = new EducationPage();
-        
         [SetUp]
         public void SetUpActions()
         {
-            //Open chrome browser
-            driver = new ChromeDriver();
             loginTestPageObj = new LoginTestPage();
             loginTestPageObj.LoginSteps();
         }
-        [Test,Order(1)]
+        [Test, Order(1)]
         public void TestAddWithEducationData()
         {
             // Read test data from the JSON file using Jsonhelper
@@ -48,16 +60,20 @@ namespace Mars_CompetitionNUnit.Tests
                 Console.WriteLine(degree);
                 string yearofgraduation = data.Yearofgraduation;
                 Console.WriteLine(yearofgraduation);
+                test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
+                string screenshotPath = CaptureScreenshot(driver, "AddEducation");
+                test.Log(Status.Info, "Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(screenshotPath).Build());
                 // Perform the education test using the Education data
                 educationPageObj.AddEducation(university, country, title, degree, yearofgraduation);
                 string newCountry = educationPageObj.GetVerifyEducationList();
                 if (country == newCountry)
                 {
-                   Assert.AreEqual(country, newCountry, "Actual country and expected country do not match");
+                    test.Pass("Added Education and Expected Education match");
+
                 }
                 else
                 {
-                    Assert.AreNotEqual(country, newCountry, "Actual country and expected country do match");
+                    test.Fail("Added Education and Expected Education do not match");
                 }
             }
         }
@@ -81,18 +97,28 @@ namespace Mars_CompetitionNUnit.Tests
                 Console.WriteLine(degree);
                 string yearofgraduation = data.Yearofgraduation;
                 Console.WriteLine(yearofgraduation);
+                
                 // Perform the education test using the Education data
                 try
                 {
                     educationPageObj.UpdateEducation(university, country, title, degree, yearofgraduation);
+                    test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
+                    string screenshotPath = CaptureScreenshot(driver, "UpdateEducation");
+                    test.Log(Status.Info, "Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(screenshotPath).Build());
                     string newUpdatedCountry = educationPageObj.GetVerifyUpdateEducationList();
-                    if (country == newUpdatedCountry)
+                    string verifyRecord = $"//tbody/tr[td[text()='{university}'] and td[text()='{degree}']]//span[1]";
+                    IWebElement desiredElement = driver.FindElement(By.XPath(verifyRecord));
+                    // Perform the verification
+                    Console.WriteLine("Expected Data: " + country);
+                    Console.WriteLine("Updated Education Data: " + newUpdatedCountry);
+                    if (desiredElement != null && desiredElement.Displayed)
+
                     {
-                        Assert.AreEqual(country, newUpdatedCountry, "Actual country and expected country do not match");
+                        test.Pass("Updated Education and Expected Education match");
                     }
                     else
                     {
-                        Assert.AreNotEqual(country, newUpdatedCountry, "Actual country and expected country do match");
+                        test.Fail("Updated Education and Expected Education do not match");
                     }
 
                 }
@@ -103,7 +129,7 @@ namespace Mars_CompetitionNUnit.Tests
             }
         }
 
-        [Test,Order(3)]
+        [Test, Order(3)]
         public void TestDeleteWithEducationData()
         {
             // Read test data from the JSON file
@@ -123,25 +149,46 @@ namespace Mars_CompetitionNUnit.Tests
                 string yearofgraduation = data.Yearofgraduation;
                 Console.WriteLine(yearofgraduation);
                 // Perform the education test using the Education data
-                educationPageObj.DeleteEducation(university,degree);
+                educationPageObj.DeleteEducation(university, degree);
+                test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
+                string screenshotPath = CaptureScreenshot(driver, "DeleteEducation");
+                test.Log(Status.Info, "Screenshot", MediaEntityBuilder.CreateScreenCaptureFromPath(screenshotPath).Build());
                 string deletedCountry = educationPageObj.GetVerifyDeleteEducationList();
-                if (country == deletedCountry)
+                if (country != deletedCountry)
                 {
-                    Assert.AreEqual(country, deletedCountry, "Actual country and expected country do not match");
+                    test.Pass("Deleted Education and Expected Education match");
                 }
                 else
                 {
-                    Assert.AreNotEqual(country, deletedCountry, "Actual country and expected country do match");
+                    test.Fail("Deleted Education and Expected Education do not match");
                 }
             }
         }
 
 
-         [TearDown]
-         public void TearDownActions()
-         {
-                driver.Quit();
-         }
+        [TearDown]
+        public void TearDownActions()
+        {
+            driver.Quit();
+            extent.Flush();
+        }
+
+        private string CaptureScreenshot(IWebDriver driver, string screenshotName)
+        {
+            ITakesScreenshot screenshotDriver = (ITakesScreenshot)driver;
+            Screenshot screenshot = screenshotDriver.GetScreenshot();
+            string screenshotPath = Path.Combine(@"D:\IC Course\Competition Task\Mars-QACompetition\Mars-CompetitionNUnit\Mars-CompetitionNUnit\CompetionScreenshot", $"{screenshotName}_{DateTime.Now:yyyyMMddHHmmss}.png");
+            screenshot.SaveAsFile(screenshotPath, ScreenshotImageFormat.Png);
+            return screenshotPath;
+        }
+        [OneTimeTearDown]
+        public void ExtentTeardown()
+        {
+            extent.Flush();
+        }
+
     }
+    
 }
+
 

@@ -10,6 +10,7 @@ namespace Mars_CompetitionNUnit.Pages
 {
     public class EducationPage : CommonDriver
     {
+       // private static IWebDriver driver;
         private static IWebElement educationTab => driver.FindElement(By.XPath("//*[@class='ui top attached tabular menu']/a[3]"));
         private static IWebElement addNewButton => driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New'] "));
         private static IWebElement universityTextbox => driver.FindElement(By.Name("instituteName"));
@@ -42,8 +43,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyEducationList()
         {
-            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 20);
-            //Thread.Sleep(2000);
+            //Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[last()]/tr/td[1]", 20);
+            Thread.Sleep(2000);
             return newCountry.Text;
         }
 
@@ -61,13 +62,14 @@ namespace Mars_CompetitionNUnit.Pages
             degreeTextbox.Clear();
             degreeTextbox.SendKeys(degree);
             yearOfGraduationDropdown.SendKeys(yearofgraduation);
+            Thread.Sleep(1000);
             updateButton.Click();
             Console.WriteLine("Eduction has been updated");
         }
         public string GetVerifyUpdateEducationList()
         {
-            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='third']//table//td", 20);
-            // Thread.Sleep(2000);
+           // Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='third']//table//td", 20);
+            Thread.Sleep(2000);
             return newUpdatedCountry.Text;
         }
         public void DeleteEducation(string university, string degree)
@@ -82,8 +84,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyDeleteEducationList()
         {
-            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='third']//table//td", 20);
-            Thread.Sleep(2000);
+            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='third']//table//td", 20);
+            //Thread.Sleep(2000);
             return deletedCountry.Text;
         }
     }

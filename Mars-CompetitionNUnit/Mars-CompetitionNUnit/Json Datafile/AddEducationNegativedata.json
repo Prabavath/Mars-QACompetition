@@ -1,5 +1,12 @@
 ﻿[
   {
+    "University": "Anna University",
+    "Country": "India",
+    "Title": "B.A",
+    "Degree": "Information Technology",
+    "Yearofgraduation": 2015
+  },
+  {
     "University": "     ",
     "Country": "Country of College/University",
     "Title": "B.Tech",
@@ -7,25 +14,18 @@
     "Yearofgraduation": 2012
   },
   {
-    "University": "     ",
+    "University": "Anna University",
     "Country": "India",
-    "Title": "M.Tech",
-    "Degree": "     ",
-    "Yearofgraduation": 2014
-  },
-  {
-    "University": "Madras University",
-    "Country": "India",
-    "Title": "M.Tech",
+    "Title": "B.A",
     "Degree": "Information Technology",
     "Yearofgraduation": 2015
   },
   {
-    "University": "Madras University",
+    "University": "Anna University",
     "Country": "India",
-    "Title": "M.Tech",
+    "Title": "B.A",
     "Degree": "Information Technology",
-    "Yearofgraduation": 2018
+    "Yearofgraduation": 2011
   }
 ]
   

@@ -1,23 +1,24 @@
 ﻿[
   {
     "University": "Madras University",
-    "Country": "Aruba",
-    "Title": "M.Tech",
+    "Country": "India",
+    "Title": "B.Tech",
     "Degree": "Information Technology",
     "Yearofgraduation": 2019
   },
   {
     "University": "Madras University",
-    "Country": "Aruba",
-    "Title": "M.Tech",
-    "Degree": "Information Technology",
-    "Yearofgraduation": 2019
-  },
-  {
-    "University": "VIT",
     "Country": "Country of College/University",
     "Title": "Title",
     "Degree": "Information Technology",
     "Yearofgraduation": 2013
+  },
+  {
+    "University": "Madras University",
+    "Country": "India",
+    "Title": "B.Tech",
+    "Degree": "Information Technology",
+    "Yearofgraduation": 2019
   }
+
 ]

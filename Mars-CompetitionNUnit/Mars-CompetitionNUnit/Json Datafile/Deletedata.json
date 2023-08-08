@@ -3,7 +3,15 @@
     "University": "VIT",
     "Country": "India",
     "Title": "M.Tech",
-    "Degree":"Information Technology",
+    "Degree": "Information Technology",
     "Yearofgraduation": 2013
+  },
+  {
+    "University": "<>&%*(*&**",
+    "Country": "India",
+    "Title": "B.A",
+    "Degree": 55555,
+    "Yearofgraduation": 2015
   }
+  
 ]

@@ -5,13 +5,15 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Mars_CompetitionNUnit.Pages
 {
-    public class NegativePage : CommonDriver
+    public class NegativePage : CommonDriver 
     {
+       // private static IWebDriver driver;
         private static IWebElement educationTab => driver.FindElement(By.XPath("//*[@class='ui top attached tabular menu']/a[3]"));
         private static IWebElement addNewButton => driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New'] "));
         private static IWebElement universityTextbox => driver.FindElement(By.Name("instituteName"));
@@ -22,6 +24,10 @@ namespace Mars_CompetitionNUnit.Pages
         private static IWebElement addButton => driver.FindElement(By.CssSelector("input[value='Add']"));
         private static IWebElement updateButton => driver.FindElement(By.XPath("//input[@value='Update']"));
         private static IWebElement messageBox => driver.FindElement(By.XPath("//div[@class='ns-box-inner']"));
+        private static IWebElement certificationsTab => driver.FindElement(By.XPath("//a[normalize-space()='Certifications']"));
+        private static IWebElement certificateTextbox => driver.FindElement(By.Name("certificationName"));
+        private static IWebElement certifiedFromTextbox => driver.FindElement(By.Name("certificationFrom"));
+        private static IWebElement yearDropdown => driver.FindElement(By.Name("certificationYear"));
         public void AddEducation(string university, string country, string title, string degree, string yearofgraduation)
         {
             //Click on Education tab
@@ -40,21 +46,25 @@ namespace Mars_CompetitionNUnit.Pages
             Wait.WaitToBeVisible(driver, "XPath", " //div[@class='ns-box-inner']", 15);
             //get the popup message text
             string popupMessage = messageBox.Text;
-            Console.WriteLine(popupMessage);
-            string expectedMessage1 = "Education has been added";
-            string expectedMessage2 = "Please enter all the fields";
-            string expectedMessage3 = "This information is already exist";
-            string expectedMessage4 = "Education information was invalid";
-            string expectedMessage5 = "Duplicated data";
-
-            if (popupMessage == expectedMessage1)
+            Console.WriteLine("messageBox.Text is: " + popupMessage);
+            string expectedMessage1 = "Please enter all the fields";
+            string expectedMessage2 = "This information is already exist.";
+            string expectedMessage3 = "Education information was invalid";
+            string expectedMessage4 = "Duplicated data";
+            if (popupMessage.Contains("has been added"))
             {
-                Console.WriteLine("Education has been added successfully");
+                Console.WriteLine("Education has been added");
             }
-            else if (popupMessage == expectedMessage2 || popupMessage == expectedMessage3 || popupMessage == expectedMessage4 || popupMessage == expectedMessage5)
+            else if ((popupMessage == expectedMessage1) ||( popupMessage == expectedMessage2) ||( popupMessage == expectedMessage3) || (popupMessage == expectedMessage4))
             {
+                Thread.Sleep(2000);
                 IWebElement cancelIcon = driver.FindElement(By.XPath("//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[3]/div/input[2]"));
                 cancelIcon.Click();
+                Thread.Sleep(2000);
+            }
+            else
+            {
+             Console.WriteLine("check error");
             }
         }
 
@@ -78,22 +88,106 @@ namespace Mars_CompetitionNUnit.Pages
             //Thread.Sleep(2000);
             //get the popup message text
             string popupMessage = messageBox.Text;
-            Console.WriteLine(popupMessage);
-            string expectedMessage1 = "Education as been updated.";
-            string expectedMessage2 = "Please enter all the fields";
-            string expectedMessage3 = "This information is already exist";
+            Console.WriteLine("messageBox.Text is : " + popupMessage);
+            string expectedMessage1 = "Please enter all the fields";
+            string expectedMessage2 = "This information is already exist.";
 
-            if (popupMessage == expectedMessage1)
+            if (popupMessage.Contains("as been updated"))
             {
-                Console.WriteLine("Education as been updated successfully");
+                Console.WriteLine("Education has been updated");
             }
-            else if (popupMessage == expectedMessage2 || popupMessage == expectedMessage3)
+            else if ((popupMessage == expectedMessage1) || (popupMessage == expectedMessage2))
             {
+                Thread.Sleep(2000);
                 IWebElement cancelIcon = driver.FindElement(By.XPath("//input[@value='Cancel']"));
-               // Wait.WaitToBeClickable(driver, "XPath", "//input[@value='Cancel']", 15);
                 cancelIcon.Click();
+                Thread.Sleep(2000);
             }
+            else 
+            {
+                Console.WriteLine("check error");
+            }
+        }
+        public void AddCertifications(string certificate, string certifiedFrom, string year)
+        {
+            //Click on certification tab
+            Wait.WaitToBeClickable(driver, "XPath", "//a[normalize-space()='Certifications']", 15);
+            certificationsTab.Click();
+            //Click on AddNew button
+            addNewButton.Click();
+            //Send the input
+            certificateTextbox.SendKeys(certificate);
+            certifiedFromTextbox.SendKeys(certifiedFrom);
+            yearDropdown.SendKeys(year);
+            //Click on Add button
+            addButton.Click();
+            Thread.Sleep(2000);
+           
+            //Wait.WaitToBeVisible(driver, "XPath", " //div[@class='ns-box-inner']", 15);
+            //get the popup message text
+            string popupMessage = messageBox.Text;
+            Console.WriteLine("messageBox.Text is : " +popupMessage);
+            string expectedMessage1 = "Please enter Certification Name, Certification From and Certification Year";
+            string expectedMessage2 = "This information is already exist.";
+            string expectedMessage3 = "Duplicated data";
 
+            if (popupMessage.Contains("has been added to your certification"))
+            {
+                Console.WriteLine("Certifications has been added");
+            }
+            else if ((popupMessage == expectedMessage1) || (popupMessage == expectedMessage2) || (popupMessage == expectedMessage3))
+                
+            {
+                Thread.Sleep(2000);
+                IWebElement cancelIcon = driver.FindElement(By.XPath("//div[@class='five wide field']//input[@value='Cancel']"));
+                cancelIcon.Click();
+               // Thread.Sleep(2000);
+            }
+            else 
+            {
+                Console.WriteLine("check error");
+            }
+        }
+        public void UpdateCertifications(string certificate, string certifiedFrom, string year)
+        {
+            Wait.WaitToBeClickable(driver, "XPath", "//a[normalize-space()='Certifications']", 20);
+            certificationsTab.Click();
+            string editiconXPath = $"//tbody/tr[td[text()='{certificate}']]//span[1]";
+            IWebElement editIcon = driver.FindElement(By.XPath(editiconXPath));
+            Thread.Sleep(2000);
+            editIcon.Click();
+            certificateTextbox.Clear();
+            certificateTextbox.SendKeys(certificate);
+            certifiedFromTextbox.Clear();
+            certifiedFromTextbox.SendKeys(certifiedFrom);
+            yearDropdown.SendKeys(year);
+            updateButton.Click();
+            //Wait.WaitToBeVisible(driver, "XPath", " //div[@class='ns-box-inner']", 15);
+            Thread.Sleep(2000);
+            //get the popup message text
+            string popupMessage = messageBox.Text;
+            Console.WriteLine("messageBox.Text is: " + popupMessage);
+            string expectedMessage1 = "Please enter Certification Name, Certification From and Certification Year";
+            string expectedMessage2 = "This information is already exist.";
+
+            if (popupMessage.Contains("has been updated to your certification"))
+            {
+                Console.WriteLine("Certifications has been updated");
+            }
+            else if((popupMessage == expectedMessage1)||( popupMessage == expectedMessage2))
+                  
+            {
+                Thread.Sleep(2000);
+                IWebElement cancelIcon = driver.FindElement(By.XPath("//input[@value='Cancel']"));
+                // Wait.WaitToBeClickable(driver, "XPath", "//input[@value='Cancel']", 15);
+               // Thread.Sleep(2000);
+                cancelIcon.Click();
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Console.WriteLine("check error");
+            }
         }
     }
 }

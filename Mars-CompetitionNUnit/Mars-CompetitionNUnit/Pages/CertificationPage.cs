@@ -10,6 +10,7 @@ namespace Mars_CompetitionNUnit.Pages
 {
     public class CertificationPage : CommonDriver
     {
+       // private static IWebDriver driver;
         private static IWebElement certificationsTab => driver.FindElement(By.XPath("//a[normalize-space()='Certifications']"));
         private static IWebElement addNewButton => driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New']"));
         private static IWebElement certificateTextbox => driver.FindElement(By.Name("certificationName"));
@@ -20,10 +21,11 @@ namespace Mars_CompetitionNUnit.Pages
         private static IWebElement updateButton => driver.FindElement(By.XPath("//input[@value='Update']"));
         private static IWebElement newUpdatedCertificate => driver.FindElement(By.XPath(".//div[@data-tab='fourth']//table//td"));
         private static IWebElement deletedCertificate => driver.FindElement(By.XPath(".//div[@data-tab='fourth']//table//td"));
+       
         public void AddCertifications(string certificate, string certifiedFrom, string year)
         {
             //Click on certification tab
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@class='ui top attached tabular menu']/a[3]", 15);
+            Wait.WaitToBeClickable(driver, "XPath", "//a[normalize-space()='Certifications']", 15);
             certificationsTab.Click();
             //Click on AddNew button
             addNewButton.Click();
@@ -33,18 +35,19 @@ namespace Mars_CompetitionNUnit.Pages
             yearDropdown.SendKeys(year);
             //Click on Add button
             addButton.Click();
+            Thread.Sleep(1000);
             Console.WriteLine("Certifications has been added");
         }
         public string GetVerifyCertificationList()
         {
-            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td[1]", 20);
-            //Thread.Sleep(2000);
+            //Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td[1]", 20);
+            Thread.Sleep(2000);
             return newCertification.Text;
         }
 
         public void UpdateCertifications(string certificate, string certifiedFrom, string year)
         {
-            Wait.WaitToBeClickable(driver, "XPath", "//*[@class='ui top attached tabular menu']/a[3]", 20);
+            Wait.WaitToBeClickable(driver, "XPath", "//*[@class='ui top attached tabular menu']", 20);
             certificationsTab.Click();
             string editiconXPath = $"//tbody/tr[td[text()='{certificate}'] and td[text()='{year}']]//span[1]";
             IWebElement editIcon = driver.FindElement(By.XPath(editiconXPath));
@@ -59,8 +62,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyUpdateCertificationsList()
         {
-            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
-            //Thread.Sleep(2000);
+            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
+            Thread.Sleep(2000);
             return newUpdatedCertificate.Text;
         }
 
@@ -76,8 +79,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyDeleteCertificationList()
         {
-            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
-            // Thread.Sleep(2000);
+            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
+            Thread.Sleep(2000);
             return deletedCertificate.Text;
         }
     }
