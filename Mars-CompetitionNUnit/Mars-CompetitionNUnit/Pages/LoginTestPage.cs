@@ -11,7 +11,6 @@ namespace Mars_CompetitionNUnit.Pages
 {
     public class LoginTestPage : CommonDriver 
     {
-       // private static IWebDriver driver;
         private static IWebElement signinButton => driver.FindElement(By.XPath("//*[@id='home']/div/div/div[1]/div/a"));
         private static IWebElement emailaddressTextbox => driver.FindElement(By.Name("email"));
         private static IWebElement passwordTextbox => driver.FindElement(By.Name("password"));

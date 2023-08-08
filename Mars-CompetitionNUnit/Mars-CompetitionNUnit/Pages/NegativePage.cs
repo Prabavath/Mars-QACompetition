@@ -13,7 +13,6 @@ namespace Mars_CompetitionNUnit.Pages
 {
     public class NegativePage : CommonDriver 
     {
-       // private static IWebDriver driver;
         private static IWebElement educationTab => driver.FindElement(By.XPath("//*[@class='ui top attached tabular menu']/a[3]"));
         private static IWebElement addNewButton => driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New'] "));
         private static IWebElement universityTextbox => driver.FindElement(By.Name("instituteName"));
@@ -98,7 +97,7 @@ namespace Mars_CompetitionNUnit.Pages
             }
             else if ((popupMessage == expectedMessage1) || (popupMessage == expectedMessage2))
             {
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
                 IWebElement cancelIcon = driver.FindElement(By.XPath("//input[@value='Cancel']"));
                 cancelIcon.Click();
                 Thread.Sleep(2000);
@@ -138,10 +137,10 @@ namespace Mars_CompetitionNUnit.Pages
             else if ((popupMessage == expectedMessage1) || (popupMessage == expectedMessage2) || (popupMessage == expectedMessage3))
                 
             {
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
                 IWebElement cancelIcon = driver.FindElement(By.XPath("//div[@class='five wide field']//input[@value='Cancel']"));
                 cancelIcon.Click();
-               // Thread.Sleep(2000);
+               
             }
             else 
             {
@@ -162,8 +161,8 @@ namespace Mars_CompetitionNUnit.Pages
             certifiedFromTextbox.SendKeys(certifiedFrom);
             yearDropdown.SendKeys(year);
             updateButton.Click();
-            //Wait.WaitToBeVisible(driver, "XPath", " //div[@class='ns-box-inner']", 15);
-            Thread.Sleep(2000);
+            Wait.WaitToBeVisible(driver, "XPath", " //div[@class='ns-box-inner']", 15);
+            //Thread.Sleep(2000);
             //get the popup message text
             string popupMessage = messageBox.Text;
             Console.WriteLine("messageBox.Text is: " + popupMessage);
@@ -177,10 +176,8 @@ namespace Mars_CompetitionNUnit.Pages
             else if((popupMessage == expectedMessage1)||( popupMessage == expectedMessage2))
                   
             {
-                Thread.Sleep(2000);
                 IWebElement cancelIcon = driver.FindElement(By.XPath("//input[@value='Cancel']"));
                 // Wait.WaitToBeClickable(driver, "XPath", "//input[@value='Cancel']", 15);
-               // Thread.Sleep(2000);
                 cancelIcon.Click();
                 Thread.Sleep(2000);
             }

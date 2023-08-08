@@ -10,7 +10,6 @@ namespace Mars_CompetitionNUnit.Pages
 {
     public class CertificationPage : CommonDriver
     {
-       // private static IWebDriver driver;
         private static IWebElement certificationsTab => driver.FindElement(By.XPath("//a[normalize-space()='Certifications']"));
         private static IWebElement addNewButton => driver.FindElement(By.XPath("//div[@class='ui bottom attached tab segment tooltip-target active']//div[contains(@class,'ui teal button')][normalize-space()='Add New']"));
         private static IWebElement certificateTextbox => driver.FindElement(By.Name("certificationName"));
@@ -40,8 +39,7 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyCertificationList()
         {
-            //Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td[1]", 20);
-            Thread.Sleep(2000);
+            Wait.WaitToBeVisible(driver, "XPath", "//*[@id=\"account-profile-section\"]/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td[1]", 20);
             return newCertification.Text;
         }
 
@@ -62,9 +60,8 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyUpdateCertificationsList()
         {
-            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
-            Thread.Sleep(2000);
-            return newUpdatedCertificate.Text;
+              Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
+              return newUpdatedCertificate.Text;
         }
 
         public void DeleteCertification(string certificate, string year)
@@ -79,8 +76,7 @@ namespace Mars_CompetitionNUnit.Pages
         }
         public string GetVerifyDeleteCertificationList()
         {
-            //Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
-            Thread.Sleep(2000);
+            Wait.WaitToBeVisible(driver, "XPath", ".//div[@data-tab='fourth']//table//td", 20);
             return deletedCertificate.Text;
         }
     }
