@@ -1,24 +1,24 @@
 ﻿[
   {
-    "University": "Madras University",
-    "Country": "India",
-    "Title": "B.Tech",
+    "University": "Anna University",
+    "Country": "Cuba",
+    "Title": "B.Sc",
     "Degree": "Information Technology",
-    "Yearofgraduation": 2019
+    "Yearofgraduation": 2013
   },
   {
-    "University": "Madras University",
+    "University": "Anna University",
     "Country": "Country of College/University",
     "Title": "Title",
     "Degree": "Information Technology",
     "Yearofgraduation": 2013
   },
   {
-    "University": "Madras University",
-    "Country": "India",
-    "Title": "B.Tech",
+    "University": "Anna University",
+    "Country": "Cuba",
+    "Title": "B.Sc",
     "Degree": "Information Technology",
-    "Yearofgraduation": 2019
+    "Yearofgraduation": 2013
   }
 
 ]
